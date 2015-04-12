@@ -31,7 +31,6 @@ for block in blocks:
 
 	# add the right prefix onto the url
 	pageUrl = link.replace("/about","http://gov.wales/about")
-	print pageUrl
 	
 	html2 = urllib2.urlopen(pageUrl)
 	soup2 = BeautifulSoup(html2)
