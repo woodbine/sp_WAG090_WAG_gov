@@ -45,7 +45,7 @@ for block in blocks:
 		# create the right strings for the new filename
 		title = title.upper().strip()
 		if ')' in title.split(' ')[-1]:
-			words = string.split(content, ' ')
+			words = title.split(content, ' ')
     			title = words[len[words] -1] # Cut of the last word
 		
 		csvYr = title.split(' ')[-1]
