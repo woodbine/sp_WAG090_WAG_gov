@@ -41,13 +41,15 @@ for block in blocks:
 	for fileBlock in fileBlocks:
 		fileUrl = fileBlock.a['href']
 		title = fileBlock.a.contents[0]
+		title = title.replace('Report','')
 		
 		# create the right strings for the new filename
 		title = title.upper().strip()
+		if ')' in title.split(' ')[-1]:
+			words = string.split(content, ' ')
+    			title = words[len[words] -1] # Cut of the last word
+		
 		csvYr = title.split(' ')[-1]
-		csvYr = csvYr.replace("200","20")
-		
-		
 		csvMth = title.split(' ')[-2][:3]
 		csvMth = convert_mth_strings(csvMth);
 	
