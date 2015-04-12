@@ -41,8 +41,6 @@ for block in blocks:
 	for fileBlock in fileBlocks:
 		fileUrl = fileBlock.a['href']
 		title = fileBlock.a.contents[0]
-		print fileUrl
-		print title
 		
 		# create the right strings for the new filename
 		title = title.upper().strip()
