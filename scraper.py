@@ -44,8 +44,9 @@ for block in blocks:
 		
 		# create the right strings for the new filename
 		title = title.upper().strip()
-		if ')' in title.split(' ')[-1]:
-			title.rpartition(' ')[0]# Cut off the last word
+		lastWord = title.split(' ')[-1]
+		if 'KB' in lastWord:
+			title.rpartition(' ')[0] #  Delete the last word
 		
 		csvYr = title.split(' ')[-1]
 		csvMth = title.split(' ')[-2][:3]
