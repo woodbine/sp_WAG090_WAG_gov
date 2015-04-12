@@ -48,10 +48,12 @@ for block in blocks:
 		print lastWord
 		
 		if 'KB' in lastWord:
-			title = title.replace(lastWord, '') #  delete last word
-		
-		csvYr = title.split(' ')[-1]
-		csvMth = title.split(' ')[-2][:3]
+			csvYr = title.split(' ')[-3]
+			csvMth = title.split(' ')[-4][:3]
+		else:
+			csvYr = title.split(' ')[-1]
+			csvMth = title.split(' ')[-2][:3]
+			
 		csvMth = convert_mth_strings(csvMth);
 	
 		filename = entity_id + "_" + csvYr + "_" + csvMth
