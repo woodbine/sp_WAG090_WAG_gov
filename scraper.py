@@ -45,6 +45,8 @@ for block in blocks:
 		# create the right strings for the new filename
 		title = title.upper().strip()
 		lastWord = title.split(' ')[-1]
+		print lastWord
+		
 		if 'KB' in lastWord:
 			title = title.replace(lastWord, '') #  delete last word
 		
