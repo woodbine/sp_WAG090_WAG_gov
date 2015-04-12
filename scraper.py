@@ -46,7 +46,7 @@ for block in blocks:
 		title = title.upper().strip()
 		lastWord = title.split(' ')[-1]
 		if 'KB' in lastWord:
-			title.rpartition(' ')[0] #  Delete the last word
+			title = title.replace(lastWord, '') #  delete last word
 		
 		csvYr = title.split(' ')[-1]
 		csvMth = title.split(' ')[-2][:3]
