@@ -50,7 +50,7 @@ def validateURL(url):
         else:
             ext = os.path.splitext(url)[1]
         validURL = r.getcode() == 200
-        validFiletype = ext.lower() in ['.csv', '.xls', '.xlsx', '.pdf']
+        validFiletype = ext.lower() in ['.csv', '.xls', '.xlsx', '.pdf', '.ods']
         return validURL, validFiletype
     except:
         print ("Error validating URL.")
@@ -84,7 +84,7 @@ def convert_mth_strings ( mth_string ):
 #### VARIABLES 1.0
 
 entity_id = "WAG090_WAG_gov"
-url = "http://gov.wales/about/civilservice/how-we-work/facts-figures/ourfinance/25kexpenditure1/?lang=en"
+url = "http://gov.wales/about/civilservice/how-we-work/facts-figures/ourfinance/expenditure-over-25k/?lang=en"
 errors = 0
 data = []
 
@@ -93,34 +93,18 @@ data = []
 html = urllib2.urlopen(url)
 soup = BeautifulSoup(html, 'lxml')
 
-
 #### SCRAPE DATA
 
-blocks = soup.findAll('div', {'class':'text_article_3col_title'})
+blocks = soup.findAll('div', {'class':'doc_download_3col_wrapper'})
 
 for block in blocks:
 
     link = block.a['href']
-    pageUrl = link.replace("/about","http://gov.wales/about")
-    html2 = urllib2.urlopen(pageUrl)
-    soup2 = BeautifulSoup(html2, 'lxml')
-    fileBlocks = soup2.findAll('div',{'class':'doc_download_3col_wrapper'})
-    for fileBlock in fileBlocks:
-        fileUrl = fileBlock.a['href']
-        title = fileBlock.a.contents[0]
-        title = title.replace('Report','')
-        title = title.upper().strip()
-        lastWord = title.split(' ')[-1]
-
-        if 'KB' in lastWord:
-            csvYr = title.split(' ')[-3]
-            csvMth = title.split(' ')[-4][:3]
-        else:
-            csvYr = title.split(' ')[-1]
-            csvMth = title.split(' ')[-2][:3]
-
-        csvMth = convert_mth_strings(csvMth.upper())
-        data.append([csvYr, csvMth, fileUrl])
+    pageUrl = 'http://gov.wales'+link
+    csvYr = block.a.text.strip().split(' ')[0]
+    csvMth = 'Y1'
+    csvMth = convert_mth_strings(csvMth.upper())
+    data.append([csvYr, csvMth, pageUrl])
 
 #### STORE DATA 1.0
 
